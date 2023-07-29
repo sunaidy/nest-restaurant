@@ -1,16 +1,29 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { ClientController } from './client/client.controller'; 
-import { ClientService } from './client/client.service';
 import { ClientModule } from './client/client.module';
 import { logger } from '../middleware/logger.middleware';
 import { RestaurantModule } from './restaurant/restaurant.module';
 import { RestaurantController } from './restaurant/restaurant.controller';
-import { RestaurantService } from './restaurant/restaurant.service';
 import { OrderModule } from './order/order.module';
+import { ConfigModule } from '@nestjs/config';
+import configuration from './config/configuration';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { DataSource } from 'typeorm';
+import { MongooseModule } from '@nestjs/mongoose';
+
 @Module({
-  imports: [ClientModule, RestaurantModule, OrderModule],
-  controllers: [ClientController, RestaurantController],
-  providers: [ClientService, RestaurantService],
+  imports: [
+    ClientModule, 
+    RestaurantModule,
+    OrderModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration],
+      cache: true,
+    }),
+    MongooseModule.forRoot(process.env.MONGO_URL)
+    ],
+  providers: [],
 })
 export class AppModule implements NestModule{
   configure(consumer: MiddlewareConsumer) {

@@ -10,6 +10,14 @@ export class RestaurantService {
     this.restaurants.push(restaurant);
   }
 
+  restaurantEntranceValidation (restaurant: restaurant) {
+    let client = restaurant.clients.find((obj)=>{(obj.age < 18)})
+      if (restaurant.clients.length > restaurant.capacity) {
+        return false
+      }
+      
+  }
+
   findAll(): restaurant[] {
     return this.restaurants;
   }

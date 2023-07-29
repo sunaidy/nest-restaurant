@@ -3,6 +3,7 @@ import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { client } from './interfaces/client.interface';
 import { ClientService } from './client.service';
+import { Client } from './dto/client.sheme';
 
 @Controller("client")
 export class ClientController {
@@ -14,7 +15,7 @@ export class ClientController {
   }
 
   @Get()
-  async findAll(): Promise<client[]> {
+  async findAll(): Promise<Client[]> {
     return this.clientService.findAll();
   }
 
@@ -30,6 +31,6 @@ export class ClientController {
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return this.clientService.remove(+id);
+    return await this.clientService.remove(id);
   }
 }
