@@ -3,6 +3,7 @@ import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { restaurant } from './interfaces/restaurant.interface';
 import { RestaurantService } from './restaurant.service';
+import { Restaurant } from './schema/restaurant.sheme';
 
 @Controller("restaurant")
 export class RestaurantController {
@@ -14,22 +15,22 @@ export class RestaurantController {
   }
 
   @Get()
-  async findAll(): Promise<restaurant[]> {
+  async findAll(): Promise<Restaurant[]> {
     return this.restaurantService.findAll();
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return this.restaurantService.findOne(+id);
+    return this.restaurantService.findOne(id);
   }
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() UpdateRestaurantDto: UpdateRestaurantDto) {
-    return this.restaurantService.update(+id, UpdateRestaurantDto);
+    return this.restaurantService.update(id, UpdateRestaurantDto);
   }
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return this.restaurantService.remove(+id);
+    return this.restaurantService.remove(id);
   }
 }

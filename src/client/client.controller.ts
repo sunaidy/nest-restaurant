@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { ClientService } from './client.service';
-import { Client } from './scheme/client.sheme';
+import { Client } from './schema/client.sheme';
 
 @Controller("client")
 export class ClientController {
