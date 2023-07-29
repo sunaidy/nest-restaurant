@@ -3,6 +3,7 @@ import { CreateOrdenDto } from './dto/create-order.dto';
 import { order } from './interfaces/order.interface';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { OrderService } from './order.service';
+import { Order } from './schema/order.sheme';
 
 @Controller('order')
 export class OrderController {
@@ -14,22 +15,22 @@ export class OrderController {
     }
   
     @Get()
-    async findAll(): Promise<order[]> {
+    async findAll(): Promise<Order[]> {
       return this.orderService.findAll();
     }
   
     @Get(':id')
     async findOne(@Param('id') id: string) {
-      return this.orderService.findOne(+id);
+      return this.orderService.findOne(id);
     }
   
     @Patch(':id')
     async update(@Param('id') id: string, @Body() UpdateOrderDto: UpdateOrderDto) {
-      return this.orderService.update(+id, UpdateOrderDto);
+      return this.orderService.update(id, UpdateOrderDto);
     }
   
     @Delete(':id')
     async remove(@Param('id') id: string) {
-      return this.orderService.remove(+id);
+      return this.orderService.remove(id);
     }
 }
