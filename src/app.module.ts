@@ -6,9 +6,7 @@ import { RestaurantModule } from './restaurant/restaurant.module';
 import { RestaurantController } from './restaurant/restaurant.controller';
 import { OrderModule } from './order/order.module';
 import { ConfigModule } from '@nestjs/config';
-import configuration from './config/configuration';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource } from 'typeorm';
+import configuration from '../config/configuration';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({

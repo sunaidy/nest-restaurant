@@ -1,9 +1,15 @@
-import { restaurant } from "../../restaurant/interfaces/restaurant.interface";
-import { client } from "../../client/interfaces/client.interface";
+import { IsObject, IsString } from 'class-validator';
+import { Client } from "../../client/schema/client.sheme";
+import { Restaurant } from "../../restaurant/schema/restaurant.sheme";
 
 export class CreateOrdenDto {
-    id: number;
+
+    @IsString()
     description: string;
-    client: client;
-    restaurant: restaurant;    
+
+    @IsObject()
+    client: Client;
+
+    @IsObject()
+    restaurant: Restaurant;    
 }

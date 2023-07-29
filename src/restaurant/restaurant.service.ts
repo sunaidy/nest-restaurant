@@ -19,11 +19,14 @@ export class RestaurantService {
 /***
  * Todo agregar valiidaciones
  */
-  restaurantEntranceValidation (restaurant: Restaurant) {
+  restaurantEntranceValidation (restaurant: Restaurant) {  
     let client = restaurant.clients.find((obj)=>{(obj.age < 18)})
-      if (restaurant.clients.length > restaurant.capacity) {
+    if (client){
+      return {'isValid': false , 'messeger': 'Los clientes deben ser mayor de edad.'}
+    }
+    if (restaurant.clients.length > restaurant.capacity) {
         return false
-      }
+    }
       
   }
 
