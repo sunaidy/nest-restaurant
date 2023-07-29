@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { client } from './interfaces/client.interface';
-import { Client } from './dto/client.sheme';
+import { Client } from './scheme/client.sheme';
 import { Model } from 'mongoose';
 import { CreateClientDto } from './dto/create-client.dto';
 import { throws } from 'assert';
