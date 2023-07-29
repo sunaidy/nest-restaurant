@@ -25,14 +25,17 @@ export class ClientService {
     return this.clientModel.find().exec();
   }
 
-  findOne(id: number) {
-    return this.clients.find((obj)=>{(obj.id == id)})
+  findOne(id: string): Promise<UpdateClientDto> {
+    return this.clientModel.findById(id)
   }
 
-  update(id: number, updateClientDto: UpdateClientDto) {
-    this.clientModel.findByIdAndUpdate(id,);
-    this.clients = this.clients.map((obj)=>obj.id == id ? {...obj, ...updateClientDto}:obj )
-    return this.clients;
+  async update(id: string, updateClientDto: UpdateClientDto) :Promise<UpdateClientDto>{
+    try{
+       await this.clientModel.findByIdAndUpdate(id,updateClientDto);
+       return this.findOne(id);
+    } catch(error){
+      throw new HttpException('Failed to update client' + error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
  async remove(id: string): Promise<CreateClientDto> {

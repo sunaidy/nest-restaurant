@@ -21,12 +21,12 @@ export class ClientController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return this.clientService.findOne(+id);
+    return this.clientService.findOne(id);
   }
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() UpdateClientDto: UpdateClientDto) {
-    return this.clientService.update(+id, UpdateClientDto);
+    return this.clientService.update(id, UpdateClientDto);
   }
 
   @Delete(':id')
