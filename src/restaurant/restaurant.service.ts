@@ -11,23 +11,13 @@ export class RestaurantService {
   create(restaurant: CreateRestaurantDto) {
     try{
       const createdRestaurat = new this.restaurantModel(restaurant);
-      return createdRestaurat.save();
+      if (createdRestaurat.clients.length <= createdRestaurat.capacity) {        
+        return createdRestaurat.save();
+      }
+      throw new HttpException('You have exceeded the maximum capacity of clients per day', HttpStatus.BAD_REQUEST);
     } catch(error){
-      throw new HttpException('Failed to create restaurant', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('Failed to create restaurant '+ error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-  }
-/***
- * Todo agregar valiidaciones
- */
-  restaurantEntranceValidation (restaurant: Restaurant) {  
-    let client = restaurant.clients.find((obj)=>{(obj.age < 18)})
-    if (client){
-      return {'isValid': false , 'messeger': 'Los clientes deben ser mayor de edad.'}
-    }
-    if (restaurant.clients.length > restaurant.capacity) {
-        return false
-    }
-      
   }
 
   findAll(): Promise<Restaurant[]> {
