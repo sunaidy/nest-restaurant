@@ -56,6 +56,12 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Execute microservice
+
+```bash
+# client
+$ nest start client  --watch
+
 ## Test
 
 ```bash
